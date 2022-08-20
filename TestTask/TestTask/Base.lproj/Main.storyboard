@@ -1,24 +1,143 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="MARKPRO-BOLD.OTF">
+            <string>MarkPro-Bold</string>
+        </array>
+        <array key="MARKPRO-MEDIUM.OTF">
+            <string>MarkPro-Medium</string>
+        </array>
+        <array key="Mark Pro.ttf">
+            <string>MarkPro</string>
+        </array>
+    </customFonts>
     <scenes>
-        <!--View Controller-->
+        <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="TestTask" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" spacing="111" translatesAutoresizingMaskIntoConstraints="NO" id="Q9R-jd-12V">
+                                <rect key="frame" x="17" y="101" width="369" height="32"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Wsz-I5-PTS">
+                                        <rect key="frame" x="0.0" y="0.0" width="197.5" height="32"/>
+                                        <fontDescription key="fontDescription" name="MarkPro-Bold" family="Mark Pro" pointSize="25"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="view all" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="EmW-d5-2Oc">
+                                        <rect key="frame" x="312" y="0.0" width="57" height="32"/>
+                                        <fontDescription key="fontDescription" name="MarkPro" family="Mark Pro" pointSize="16"/>
+                                        <color key="textColor" red="1" green="0.43137254901960786" blue="0.30588235294117649" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Vv5-cv-swb">
+                                <rect key="frame" x="22" y="157" width="392" height="116.5"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Vv5-cv-swb" secondAttribute="height" multiplier="129:37" constant="-13.945945945945937" id="elG-Jf-Ps7"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="15" minimumInteritemSpacing="10" id="LsR-Ok-a8P">
+                                    <size key="itemSize" width="77" height="111"/>
+                                    <size key="estimatedItemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="selectCategory" id="UcL-CJ-hsw" customClass="CollectionViewCell" customModule="TestTask" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="3" width="77" height="111"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="yDc-ui-7yv">
+                                            <rect key="frame" x="0.0" y="0.0" width="77" height="111"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Apf-e1-GVc">
+                                                    <rect key="frame" x="0.0" y="0.0" width="77" height="111"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="7H1-JX-cV7">
+                                                            <rect key="frame" x="0.0" y="0.0" width="77" height="77"/>
+                                                            <subviews>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iFW-yW-qKv">
+                                                                    <rect key="frame" x="25" y="25" width="27" height="27"/>
+                                                                </imageView>
+                                                            </subviews>
+                                                            <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
+                                                            <constraints>
+                                                                <constraint firstItem="iFW-yW-qKv" firstAttribute="width" secondItem="7H1-JX-cV7" secondAttribute="width" multiplier="0.350649" id="MRg-YZ-rrR"/>
+                                                                <constraint firstItem="iFW-yW-qKv" firstAttribute="centerX" secondItem="7H1-JX-cV7" secondAttribute="centerX" id="gmD-Cv-bws"/>
+                                                                <constraint firstItem="iFW-yW-qKv" firstAttribute="centerY" secondItem="7H1-JX-cV7" secondAttribute="centerY" id="hO4-YA-n6m"/>
+                                                                <constraint firstItem="iFW-yW-qKv" firstAttribute="height" secondItem="7H1-JX-cV7" secondAttribute="height" multiplier="0.350649" id="mAr-7U-Ghx"/>
+                                                                <constraint firstAttribute="width" secondItem="7H1-JX-cV7" secondAttribute="height" multiplier="1:1" id="rz3-Ic-QAn"/>
+                                                            </constraints>
+                                                        </view>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phones" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="cGa-Kw-Cee">
+                                                            <rect key="frame" x="0.0" y="87" width="77" height="24"/>
+                                                            <fontDescription key="fontDescription" name="MarkPro-Medium" family="Mark Pro" pointSize="12"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Apf-e1-GVc" firstAttribute="leading" secondItem="yDc-ui-7yv" secondAttribute="leading" id="FhY-ye-yrc"/>
+                                                <constraint firstItem="Apf-e1-GVc" firstAttribute="top" secondItem="yDc-ui-7yv" secondAttribute="top" id="TWQ-B3-tgx"/>
+                                                <constraint firstAttribute="bottom" secondItem="Apf-e1-GVc" secondAttribute="bottom" id="Vrx-Sr-Pbd"/>
+                                                <constraint firstAttribute="trailing" secondItem="Apf-e1-GVc" secondAttribute="trailing" id="myL-Vn-pDu"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="77" height="111"/>
+                                        <connections>
+                                            <outlet property="imageViewCell" destination="iFW-yW-qKv" id="KGR-u3-xlb"/>
+                                            <outlet property="labelCellOutlet" destination="cGa-Kw-Cee" id="d2T-r6-9Zm"/>
+                                            <outlet property="viewCellOutlet" destination="7H1-JX-cV7" id="ijp-tJ-d4g"/>
+                                            <outlet property="viewRound" destination="7H1-JX-cV7" id="ZMI-ha-OjM"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" red="0.97254908080000002" green="0.97254908080000002" blue="0.97254908080000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="Q9R-jd-12V" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="17" id="JAc-NG-lEj"/>
+                            <constraint firstItem="Vv5-cv-swb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="22" id="M9X-VB-gsk"/>
+                            <constraint firstItem="Vv5-cv-swb" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="QRY-bM-7cV"/>
+                            <constraint firstItem="Q9R-jd-12V" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.891304" id="afX-Wz-iAZ"/>
+                            <constraint firstItem="Q9R-jd-12V" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="57" id="eR0-vI-ocp"/>
+                            <constraint firstItem="Vv5-cv-swb" firstAttribute="top" secondItem="Q9R-jd-12V" secondAttribute="bottom" constant="24" id="yNb-48-gAK"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="collectionViewOutlet" destination="Vv5-cv-swb" id="Cyh-pq-Zv9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-26.086956521739133" y="84.375"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="opaqueSeparatorColor">
+            <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
