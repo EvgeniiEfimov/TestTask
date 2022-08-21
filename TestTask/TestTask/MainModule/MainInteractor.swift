@@ -6,3 +6,22 @@
 //
 
 import Foundation
+
+protocol MainInteractorProtocol: AnyObject {
+    var getData: Welcome? { get }
+}
+
+final class MainInteractor: MainInteractorProtocol {
+    weak var presenter: MainPresenterProtocol!
+    var networkService: NetworkServiceProtocol!
+    
+    
+    required init(presenter: MainPresenterProtocol) {
+        self.presenter = presenter
+    }
+    
+    
+    var getData: Welcome? {
+        networkService.dataJSON
+    }
+}

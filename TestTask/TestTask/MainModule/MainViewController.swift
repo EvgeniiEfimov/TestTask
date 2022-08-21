@@ -7,27 +7,40 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+protocol MainViewProtocol: AnyObject {
+    func startConfig(_ data: Welcome?)
+}
+
+final class MainViewController: UIViewController {
 
     @IBOutlet weak var collectionViewOutlet: UICollectionView!
     @IBOutlet weak var viewCell: UICollectionViewCell!
     @IBOutlet weak var imageViewCell: UIImageView!
     @IBOutlet weak var labelCell: UILabel!
     
-    let testArray = ["Phones", "Computer", "Health", "Books", "Tea", "Car"]
+    var presenter: MainPresenterProtocol!
+    var configurator: MainConfiguratorProtocol = MainConfigurator()
+    
+    let testArray = ["Phones", "Computer", "Health", "Books", "Phones", "Computer", "Health", "Books"]
     override func viewDidLoad() {
         super.viewDidLoad()
+        configurator.configure(self)
+//        presenter.configureVC()
         
         collectionViewOutlet.delegate = self
         collectionViewOutlet.dataSource = self
         
         collectionViewOutlet.backgroundColor = UIColor.clear
     }
-
-
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        collectionViewOutlet.selectItem(at: .init(item: 0, section: 0), animated: true, scrollPosition: .left)
+    }
 }
 
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         1
@@ -39,13 +52,25 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionViewOutlet.dequeueReusableCell(withReuseIdentifier: "selectCategory", for: indexPath) as! CollectionViewCell
+        cell.imageViewCell.image = UIImage(named: "\(testArray[indexPath.item])")?.withRenderingMode(.alwaysTemplate)
         cell.labelCellOutlet.text = testArray[indexPath.item]
-        cell.imageViewCell.image = UIImage.init(named: "Vector")
         cell.viewRound.layer.cornerRadius = cell.viewRound.frame.height / 2
         cell.viewRound.backgroundColor = UIColor.white
+        if cell.isSelected == true {
+            collectionViewOutlet.selectItem(at: indexPath, animated: true, scrollPosition: .left)
+            cell.isSelected = true
+        }
         return cell
     }
     
-    
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//
+//    }
+}
+
+extension MainViewController: MainViewProtocol {
+    func startConfig(_ data: Welcome?) {
+        
+    }
 }
 
