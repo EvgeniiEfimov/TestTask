@@ -57,7 +57,6 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         cell.viewRound.layer.cornerRadius = cell.viewRound.frame.height / 2
         cell.viewRound.backgroundColor = UIColor.white
         if cell.isSelected == true {
-            collectionViewOutlet.selectItem(at: indexPath, animated: true, scrollPosition: .left)
             cell.isSelected = true
         }
         return cell
