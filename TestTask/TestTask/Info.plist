@@ -7,7 +7,9 @@
 		<string>Mark Pro.ttf</string>
 		<string>MARKPRO-BOLD.OTF</string>
 		<string>MARKPRO-HEAVY.OTF</string>
+		<string>SFPRODISPLAYBOLD.OTF</string>
 		<string>MARKPRO-MEDIUM.OTF</string>
+		<string>SFPRODISPLAYREGULAR.OTF</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
