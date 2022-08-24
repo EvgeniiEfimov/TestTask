@@ -27,10 +27,13 @@ final class MainViewController: UIViewController {
     var configurator: MainConfiguratorProtocol = MainConfigurator()
     
     let testArray = ["Phones", "Computer", "Health", "Books", "Phones", "Computer", "Health", "Books"]
+    
+    var data: Welcome!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configurator.configure(self)
-//        presenter.configureVC()
+        presenter.configureVC()
         
         collectionViewOutlet.delegate = self
         collectionViewHotSales.delegate = self
@@ -38,11 +41,7 @@ final class MainViewController: UIViewController {
         collectionViewHotSales.dataSource = self
         collectionViewBestSeller.delegate = self
         collectionViewBestSeller.dataSource = self
-        
-//        collectionViewOutlet.backgroundColor = UIColor.clear
-//        collectionViewOutlet.contentInset.left = 30
-        
-        
+
         setStartView()
     }
     
@@ -64,6 +63,9 @@ final class MainViewController: UIViewController {
         textFieldSearthOutlet.layer.masksToBounds = true
         
         configureViewCell(collectionViewHotSales)
+        configureViewCellBestSeller(collectionViewBestSeller)
+        
+        
     }
 }
 
@@ -80,13 +82,12 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         case collectionViewOutlet:
             count = testArray.count
         case collectionViewHotSales:
-            count = 4
+            count = data.homeStore.count
         default:
-            count = 4
+            count = data.bestSeller.count
         }
         return count
     }
-    
     
     
      func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -96,19 +97,40 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
              let cell = collectionViewOutlet.dequeueReusableCell(withReuseIdentifier: "selectCategory", for: indexPath) as! CollectionViewCell
              cell.imageViewCell.image = UIImage(named: "\(testArray[indexPath.item])")?.withRenderingMode(.alwaysTemplate)
              cell.labelCellOutlet.text = testArray[indexPath.item]
-             cell.viewRound.layer.cornerRadius = cell.viewRound.frame.height / 2
+             DispatchQueue.main.async {
+                 cell.viewRound.layer.cornerRadius = cell.viewRound.frame.width / 2
+             }
              cell.viewRound.backgroundColor = UIColor.white
              if cell.isSelected == true {
                  cell.isSelected = true
              }
                  return cell
+             
          case collectionViewHotSales:
              let cell = collectionViewHotSales.dequeueReusableCell(withReuseIdentifier: "cellHotSalesCollecton", for: indexPath) as! CollectionViewCellHotSales
              cell.imageViewHotSales.image = UIImage.init(named: "test")
              cell.viewContentCell.layer.cornerRadius = 15
+             
+             cell.imageNewCellHotSales.isHidden = data.homeStore[indexPath.item].isNew ?? true
+             cell.labelModelCellHotSales.text = data.homeStore[indexPath.item].title
+             cell.labelInfoCellHotSales.text = data.homeStore[indexPath.item].subtitle
              return cell
          default:
              let cell = collectionViewBestSeller.dequeueReusableCell(withReuseIdentifier: "cellBestSalesCollecton", for: indexPath) as! CollectionViewCellBestSales
+             cell.imageViewModelCellBS.image = UIImage(named: "samsungTest")
+             let imageFavorite = data.bestSeller[indexPath.item].isFavorites ?
+             UIImage(named: "heart.fill") : UIImage(named: "heart")
+             cell.buttonFavorite.setImage(imageFavorite, for: .normal)
+             cell.labelFullPrice.text = "\(data.bestSeller[indexPath.item].discountPrice)"
+             cell.labelPrice.text = "\(data.bestSeller[indexPath.item].priceWithoutDiscount)"
+             cell.labelModel.text = "\(data.bestSeller[indexPath.item].title)"
+             cell.layer.cornerRadius = 15
+             cell.buttonFavorite.layer.cornerRadius = cell.buttonFavorite.frame.width/2
+             cell.buttonFavorite.layer.masksToBounds = false
+             cell.buttonFavorite.layer.shadowColor = UIColor.gray.cgColor
+             cell.buttonFavorite.layer.shadowOffset = CGSize(width: 0, height: 0)
+             cell.buttonFavorite.layer.shadowOpacity = 0.3
+             cell.buttonFavorite.layer.shadowRadius = 6
              return cell
          }
     }
@@ -125,14 +147,17 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
         case collectionViewHotSales:
             return CGSize(width: collectionView.frame.width - 20, height: collectionView.frame.height)
         default:
-            return CGSize(width: collectionView.frame.width / 2 - 20, height: collectionView.frame.height)
+            return CGSize(width: collectionView.frame.width / 2 - 15, height: collectionView.frame.height)
         }
     }
 }
 
 extension MainViewController: MainViewProtocol {
     func startConfig(_ data: Welcome?) {
-        
+        guard let getData = data else {
+            return
+        }
+        self.data = getData
     }
 }
 
@@ -145,6 +170,16 @@ extension MainViewController {
     carouselLayout.minimumLineSpacing = 20
             collectionView.collectionViewLayout = carouselLayout
     }
+    
+    func configureViewCellBestSeller(_ collectionView: UICollectionView) {
+        let cellPadding = 10.0
+            let carouselLayout = UICollectionViewFlowLayout()
+            carouselLayout.scrollDirection = .horizontal
+    carouselLayout.sectionInset = .init(top: 0, left: cellPadding, bottom: 0, right: cellPadding)
+    carouselLayout.minimumLineSpacing = 10
+            collectionView.collectionViewLayout = carouselLayout
+    }
+
 }
 
 

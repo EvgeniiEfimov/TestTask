@@ -42,7 +42,6 @@ class CollectionViewCellBestSales: UICollectionViewCell {
     
     
     
-    
 }
 
 

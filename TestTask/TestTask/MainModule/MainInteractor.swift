@@ -9,11 +9,12 @@ import Foundation
 
 protocol MainInteractorProtocol: AnyObject {
     var getData: Welcome? { get }
+     
 }
 
 final class MainInteractor: MainInteractorProtocol {
     weak var presenter: MainPresenterProtocol!
-    var networkService: NetworkServiceProtocol!
+    var networkService: NetworkServiceProtocol = NetworkService()
     
     
     required init(presenter: MainPresenterProtocol) {
@@ -22,6 +23,11 @@ final class MainInteractor: MainInteractorProtocol {
     
     
     var getData: Welcome? {
-        networkService.dataJSON
+            return networkService.dataJSON
+
+        
+//        return networkService.dataJSON
+//        return networkService.testGetData()
+        
     }
 }
