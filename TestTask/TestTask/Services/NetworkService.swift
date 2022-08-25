@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 
 protocol NetworkServiceProtocol: AnyObject {
     var dataJSON: Welcome? { get }
@@ -17,6 +18,22 @@ protocol NetworkServiceProtocol: AnyObject {
  class NetworkService: NetworkServiceProtocol {
     
     var dataJSON: Welcome? {
+        AF.request("https://run.mocky.io/v3/654bd15e-b121-49ba-a588-960956b15175").responseJSON { responseJSON in
+
+            guard let statusCode = responseJSON.response?.statusCode else { return }
+            print("statusCode: ", statusCode)
+
+//            if (200..<300).contains(statusCode) {
+//                let value = responseJSON.result
+//                print("value: ", value ?? "nil")
+//            } else {
+//                print("error")
+//            }
+        }
+        
+        
+        
+        
 //        return nil
         var welcomeData: Welcome!
         let urlString = "https://run.mocky.io/v3/654bd15e-b121-49ba-a588-960956b15175"

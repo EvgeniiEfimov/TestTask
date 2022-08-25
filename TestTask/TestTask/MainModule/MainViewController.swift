@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 protocol MainViewProtocol: AnyObject {
     func startConfig(_ data: Welcome?)
@@ -32,6 +33,20 @@ final class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        AF.request("https://run.mocky.io/v3/654bd15e-b121-49ba-a588-960956b15175").responseJSON { responseJSON in
+
+            guard let statusCode = responseJSON.response?.statusCode else { return }
+            print("statusCode: ", statusCode)
+
+//            if (200..<300).contains(statusCode) {
+//                let value = responseJSON.result
+//                print("value: ", value ?? "nil")
+//            } else {
+//                print("error")
+//            }
+        }
+        
         configurator.configure(self)
         presenter.configureVC()
         
