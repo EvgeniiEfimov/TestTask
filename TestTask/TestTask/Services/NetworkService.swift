@@ -6,74 +6,60 @@
 //
 
 import Foundation
-import Alamofire
 
 protocol NetworkServiceProtocol: AnyObject {
-    var dataJSON: Welcome? { get }
-    func testGetData() -> Welcome?
-//    var testModel: Welcome { get }
-//    func dataJSON(_ url: String, _ model: ) ->
+    func requestAndParsJSON(complition: @escaping (Welcome, [Data]?, [Data]?) -> Void)
+    func brandsNamesArray(_ json: Welcome) -> [String]
 }
 
- class NetworkService: NetworkServiceProtocol {
-    
-    var dataJSON: Welcome? {
-        AF.request("https://run.mocky.io/v3/654bd15e-b121-49ba-a588-960956b15175").responseJSON { responseJSON in
-
-            guard let statusCode = responseJSON.response?.statusCode else { return }
-            print("statusCode: ", statusCode)
-
-//            if (200..<300).contains(statusCode) {
-//                let value = responseJSON.result
-//                print("value: ", value ?? "nil")
-//            } else {
-//                print("error")
-//            }
-        }
+class NetworkService: NetworkServiceProtocol {
+   
+    var interactor: MainInteractorProtocol!
         
-        
-        
-        
-//        return nil
-        var welcomeData: Welcome!
+    func requestAndParsJSON(complition: @escaping (Welcome, [Data]?, [Data]?) -> Void) {
         let urlString = "https://run.mocky.io/v3/654bd15e-b121-49ba-a588-960956b15175"
-        guard let url = URL(string: urlString) else { return nil }
+        guard let url = URL(string: urlString) else { return }
 
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
+        URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data else { return }
             guard error == nil else { return }
 
             do {
                 let mainData = try JSONDecoder().decode(Welcome.self, from: data)
-                welcomeData = mainData
+                
+                 let data = self.parsImage(mainData)
+//                self.interactor.networkResponse(mainData)
+                complition(mainData, data.0, data.1)
             } catch let error {
                 print(error)
             }
         }.resume()
-    
-        return welcomeData
     }
     
-     func testGetData() -> Welcome? {
-                 return nil
-//                 var welcomeData: Welcome!
-//                 let urlString = "https://run.mocky.io/v3/654bd15e-b121-49ba-a588-960956b15175"
-//                 guard let url = URL(string: urlString) else { return nil }
-//
-//                 URLSession.shared.dataTask(with: url) { data, response, error in
-//                     guard let data = data else { return }
-//                     guard error == nil else { return }
-//
-//                     do {
-//                         let mainData = try JSONDecoder().decode(Welcome.self, from: data)
-//                         welcomeData = mainData
-//                     } catch let error {
-//                         print(error)
-//                     }
-//                 }.resume()
-//                 return welcomeData
-             }
-//    var testModel: Welcome {
-//        }
+    func parsImage(_ json: Welcome) -> ([Data]?,[Data]?) {
+        var arrayBestSeller = [Data]()
+        var arrayhomwStore = [Data]()
+        for image in json.bestSeller {
+            guard let url = URL(string: image.picture) else { break }
+            guard let data = try? Data(contentsOf: url) else { break }
+            arrayBestSeller.append(data)
+        }
+        print(arrayBestSeller)
+        
+        for image in json.homeStore {
+            guard let url = URL(string: image.picture) else { break }
+            guard let data = try? Data(contentsOf: url) else { break }
+            arrayhomwStore.append(data)
+        }
+        return (arrayhomwStore, arrayBestSeller)
+    }
     
+    func brandsNamesArray(_ json: Welcome) -> [String] {
+        var arrayNameBrands = [String]()
+        for nameBrand in json.bestSeller {
+            arrayNameBrands.append(nameBrand.title)
+        }
+        return arrayNameBrands
+    }
 }
+

@@ -8,26 +8,27 @@
 import Foundation
 
 protocol MainInteractorProtocol: AnyObject {
-    var getData: Welcome? { get }
-     
+    func getRequest()
+    var getСategories: [String] { get }
 }
 
 final class MainInteractor: MainInteractorProtocol {
     weak var presenter: MainPresenterProtocol!
     var networkService: NetworkServiceProtocol = NetworkService()
+    var settingsDefaults: SettingsDefaultsProtocol = SettingsDefaults()
     
     
     required init(presenter: MainPresenterProtocol) {
         self.presenter = presenter
     }
-    
-    
-    var getData: Welcome? {
-            return networkService.dataJSON
 
-        
-//        return networkService.dataJSON
-//        return networkService.testGetData()
-        
+    func getRequest() {
+        networkService.requestAndParsJSON { data, arrayHomeImage, arrayBestImage  in
+            self.presenter.networkData(data, arrayHomeImage, arrayBestImage)
+        }
+    }
+    
+    var getСategories: [String] {
+        settingsDefaults.arrayСategories
     }
 }

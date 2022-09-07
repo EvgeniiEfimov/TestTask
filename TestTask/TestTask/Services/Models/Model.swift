@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 // This file was generated from JSON Schema using quicktype, do not modify it directly.
 // To parse the JSON, add this file to your project and do:
@@ -30,6 +31,7 @@ struct BestSeller: Codable {
     let title: String
     let priceWithoutDiscount, discountPrice: Int
     let picture: String
+//    var pictureImage: Data?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -38,6 +40,7 @@ struct BestSeller: Codable {
         case priceWithoutDiscount = "price_without_discount"
         case discountPrice = "discount_price"
         case picture
+//        case pictureImage
     }
 }
 
@@ -48,11 +51,13 @@ struct HomeStore: Codable {
     let title, subtitle: String
     let picture: String
     let isBuy: Bool
+//    var pictureImage: Data?
 
     enum CodingKeys: String, CodingKey {
         case id
         case isNew = "is_new"
         case title, subtitle, picture
         case isBuy = "is_buy"
+//        case pictureImage
     }
 }

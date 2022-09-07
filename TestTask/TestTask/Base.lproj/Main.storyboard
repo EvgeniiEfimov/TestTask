@@ -217,6 +217,9 @@
                                 <buttonConfiguration key="configuration" style="plain" image="filtr" imagePadding="0.0">
                                     <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="buttonFiltrAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XVF-h2-V4q"/>
+                                </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="b6C-Px-na0">
                                 <rect key="frame" x="17" y="292" width="380" height="36.5"/>
@@ -467,10 +470,18 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash" translatesAutoresizingMaskIntoConstraints="NO" id="20g-KB-BYZ">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="ha7-R8-JV7">
+                                <rect key="frame" x="197" y="438" width="20" height="20"/>
+                                <color key="color" systemColor="systemGroupedBackgroundColor"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.97254908080000002" green="0.97254908080000002" blue="0.97254908080000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
+                            <constraint firstItem="ha7-R8-JV7" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0id-gj-XRz"/>
                             <constraint firstItem="b6C-Px-na0" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="17" id="26P-F4-kyX"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="bsC-jy-D2L" secondAttribute="trailing" id="A9f-52-u3c"/>
                             <constraint firstItem="Q9R-jd-12V" firstAttribute="top" secondItem="ASb-qV-4Yp" secondAttribute="bottom" constant="6" id="AC1-mG-8zE"/>
@@ -478,6 +489,7 @@
                             <constraint firstItem="25f-7a-Mj2" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="EL6-Bi-0lq"/>
                             <constraint firstItem="Q9R-jd-12V" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="17" id="JAc-NG-lEj"/>
                             <constraint firstItem="hWw-B6-Gnj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="17" id="JSU-go-QDC"/>
+                            <constraint firstItem="20g-KB-BYZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="LDJ-DR-KXK"/>
                             <constraint firstItem="Vv5-cv-swb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="M9X-VB-gsk"/>
                             <constraint firstItem="Xdm-SF-Gq7" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="MtM-Ni-utT"/>
                             <constraint firstItem="Vv5-cv-swb" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="QRY-bM-7cV"/>
@@ -486,27 +498,37 @@
                             <constraint firstItem="b6C-Px-na0" firstAttribute="top" secondItem="Oir-hn-V1x" secondAttribute="bottom" constant="10" id="Rdg-Cm-Nay"/>
                             <constraint firstItem="25f-7a-Mj2" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Tox-EF-n3W"/>
                             <constraint firstItem="Xdm-SF-Gq7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Ts8-b2-E2s"/>
+                            <constraint firstAttribute="bottom" secondItem="20g-KB-BYZ" secondAttribute="bottom" id="Xa2-6J-fnx"/>
                             <constraint firstItem="ASb-qV-4Yp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ZGm-ij-zf4"/>
                             <constraint firstItem="Q9R-jd-12V" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.891304" id="afX-Wz-iAZ"/>
+                            <constraint firstItem="20g-KB-BYZ" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="cvV-Xn-N3I"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="b6C-Px-na0" secondAttribute="trailing" constant="17" id="dR4-WM-rLV"/>
                             <constraint firstItem="Oir-hn-V1x" firstAttribute="top" secondItem="Vv5-cv-swb" secondAttribute="bottom" constant="20" id="eAq-OE-OFi"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Oir-hn-V1x" secondAttribute="trailing" constant="20" id="g33-Qi-9Sb"/>
                             <constraint firstItem="ASb-qV-4Yp" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="ghf-4e-5Zb"/>
                             <constraint firstItem="25f-7a-Mj2" firstAttribute="top" secondItem="b6C-Px-na0" secondAttribute="bottom" constant="8" symbolic="YES" id="i0p-6R-YhA"/>
                             <constraint firstItem="bsC-jy-D2L" firstAttribute="leading" secondItem="ASb-qV-4Yp" secondAttribute="trailing" constant="41.5" id="jh7-CU-dpn"/>
+                            <constraint firstItem="ha7-R8-JV7" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="lnC-AS-eSw"/>
                             <constraint firstItem="Xdm-SF-Gq7" firstAttribute="top" secondItem="hWw-B6-Gnj" secondAttribute="bottom" constant="8" symbolic="YES" id="pT9-AR-bFe"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hWw-B6-Gnj" secondAttribute="trailing" constant="17" id="siR-pv-Bpi"/>
                             <constraint firstItem="Oir-hn-V1x" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="29" id="xRu-qS-rNH"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="20g-KB-BYZ" secondAttribute="trailing" id="yBE-sL-y8r"/>
                             <constraint firstItem="Vv5-cv-swb" firstAttribute="top" secondItem="Q9R-jd-12V" secondAttribute="bottom" constant="10" id="yNb-48-gAK"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="Lrp-6d-PXX"/>
+                    <tabBarItem key="tabBarItem" title="Item" id="Va6-MO-7H5">
+                        <color key="badgeColor" red="1" green="0.43137254899999999" blue="0.30588235289999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </tabBarItem>
                     <navigationItem key="navigationItem" id="9UE-4z-vg8"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="activitiOutlet" destination="ha7-R8-JV7" id="DVH-GW-q5t"/>
+                        <outlet property="buttonFiltr" destination="bsC-jy-D2L" id="BcI-17-Mcu"/>
                         <outlet property="buttonQRSerth" destination="OIn-2S-89x" id="dcs-dJ-IHv"/>
                         <outlet property="collectionViewBestSeller" destination="Xdm-SF-Gq7" id="kg7-hM-2js"/>
                         <outlet property="collectionViewHotSales" destination="25f-7a-Mj2" id="zTJ-Bm-vnQ"/>
                         <outlet property="collectionViewOutlet" destination="Vv5-cv-swb" id="Cyh-pq-Zv9"/>
+                        <outlet property="splashImageOutlet" destination="20g-KB-BYZ" id="BBJ-hY-TiL"/>
                         <outlet property="textFieldSearthOutlet" destination="z6V-ib-0Aa" id="VcU-ae-ZpF"/>
                     </connections>
                 </viewController>
@@ -520,8 +542,12 @@
         <image name="Top" width="158" height="16"/>
         <image name="filtr" width="11" height="13"/>
         <image name="heart" catalog="system" width="128" height="109"/>
+        <image name="splash" width="414" height="896"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGroupedBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

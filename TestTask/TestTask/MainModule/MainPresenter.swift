@@ -9,6 +9,8 @@ import Foundation
 
 protocol MainPresenterProtocol: AnyObject {
     func configureVC()
+    func networkData(_ data: Welcome, _ arrayHomeImage: [Data]?, _ arrayBestImage: [Data]?)
+    func tapButtonFiltr()
 }
 
 final class MainPresenter: MainPresenterProtocol {
@@ -20,6 +22,15 @@ final class MainPresenter: MainPresenterProtocol {
         self.view = view
     }
     func configureVC() {
-        view.startConfig(interactor.getData)
+        interactor.getRequest()
+        view.arrayСategories = interactor.getСategories
+    }
+    
+    func networkData(_ data: Welcome, _ arrayHomeImage: [Data]?, _ arrayBestImage: [Data]?) {
+        view.startConfig(data, arrayHomeImage, arrayBestImage)
+    }
+    
+    func tapButtonFiltr() {
+        router.presentViewFiltr()
     }
 }
